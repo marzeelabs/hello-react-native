@@ -12,7 +12,7 @@ import {
 } from 'expo';
 
 import AppNavigator from './navigation/AppNavigator';
-import styles from './AppStyles';
+import styles from './styles/App';
 
 export default class App extends React.Component {
   state = {
