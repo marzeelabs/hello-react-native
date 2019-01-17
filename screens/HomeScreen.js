@@ -10,6 +10,7 @@ import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
 import styles from './styles/HomeScreen';
+import TestPlaque from '../components/TestPlaque';
 
 export default class HomeScreen extends Component {
   static navigationOptions = {
@@ -53,8 +54,6 @@ export default class HomeScreen extends Component {
   }
 
   render() {
-    const { savedValue } = this.props;
-
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
@@ -95,6 +94,8 @@ export default class HomeScreen extends Component {
               <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
             </TouchableOpacity>
           </View>
+
+          <TestPlaque />
         </ScrollView>
 
         <View style={styles.tabBarInfoContainer}>
