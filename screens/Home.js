@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
   Image,
+  Platform,
   ScrollView,
   Text,
   TouchableOpacity,
@@ -9,12 +10,24 @@ import {
 import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
-import styles from './styles/HomeScreen';
-import TestPlaque from '../components/TestPlaque';
+import SignOut from '../components/SignOut';
+import styles from './styles/Home';
+import TabBarIcon from '../components/TabBarIcon';
 
 export default class HomeScreen extends Component {
   static navigationOptions = {
     header: null,
+    tabBarLabel: 'Home',
+    tabBarIcon: ({ focused }) => (
+      <TabBarIcon
+        focused={focused}
+        name={
+          Platform.OS === 'ios'
+            ? `ios-information-circle${focused ? '' : '-outline'}`
+            : 'md-information-circle'
+        }
+      />
+    ),
   };
 
   _handleLearnMorePress() {
@@ -31,19 +44,20 @@ export default class HomeScreen extends Component {
 
   _maybeRenderDevelopmentModeWarning() {
     if (__DEV__) {
-      const learnMoreButton = (
-        <Text onPress={this._handleLearnMorePress} style={styles.helpLinkText}>
-          Learn more
-        </Text>
-      );
-
       return (
-        <Text style={styles.developmentModeText}>
-          Development mode is enabled, your app will be slower but you can use useful development
-          tools.
-          {' '}
-          {learnMoreButton}
-        </Text>
+        <View style={styles.getStartedContainer}>
+          <Text style={styles.developmentModeText}>
+            Development mode is enabled, your app will be slower but you can use useful development
+            tools.
+            {' '}
+            <Text onPress={this._handleLearnMorePress} style={styles.helpLinkText}>
+              Learn more
+            </Text>
+          </Text>
+          <TouchableOpacity onPress={this._handleHelpPress}>
+            <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
+          </TouchableOpacity>
+        </View>
       );
     }
     return (
@@ -67,16 +81,9 @@ export default class HomeScreen extends Component {
               style={styles.welcomeImage}
             />
           </View>
+          { this._maybeRenderDevelopmentModeWarning() }
 
           <View style={styles.getStartedContainer}>
-            {this._maybeRenderDevelopmentModeWarning()}
-
-            <Text style={styles.getStartedText}>Get started by opening</Text>
-
-            <View style={[ styles.codeHighlightContainer, styles.homeScreenFilename ]}>
-              <MonoText style={styles.codeHighlightText}>screens/HomeScreen.js</MonoText>
-            </View>
-
             <Image
               source={
                 require('../assets/images/0.png')
@@ -89,13 +96,7 @@ export default class HomeScreen extends Component {
             </Text>
           </View>
 
-          <View style={styles.helpContainer}>
-            <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>
-              <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
-            </TouchableOpacity>
-          </View>
-
-          <TestPlaque />
+          <SignOut />
         </ScrollView>
 
         <View style={styles.tabBarInfoContainer}>

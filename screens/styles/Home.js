@@ -9,7 +9,6 @@ export default StyleSheet.create({
     backgroundColor: '#fff',
   },
   developmentModeText: {
-    marginBottom: 20,
     color: 'rgba(0,0,0,0.4)',
     fontSize: 14,
     lineHeight: 19,
@@ -38,9 +37,7 @@ export default StyleSheet.create({
   getStartedContainer: {
     alignItems: 'center',
     marginHorizontal: 50,
-  },
-  homeScreenFilename: {
-    marginVertical: 7,
+    marginBottom: 20,
   },
   codeHighlightText: {
     color: 'rgba(96,100,109, 0.8)',
@@ -87,9 +84,6 @@ export default StyleSheet.create({
   helpContainer: {
     marginTop: 15,
     alignItems: 'center',
-  },
-  helpLink: {
-    paddingVertical: 15,
   },
   helpLinkText: {
     fontSize: 14,

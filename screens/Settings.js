@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { ExpoConfigView } from '@expo/samples';
 
-export default class SettingsScreen extends React.Component {
+export default class SettingsScreen extends PureComponent {
   static navigationOptions = {
     title: 'app.json',
   };

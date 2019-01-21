@@ -1,9 +1,4 @@
-import React from 'react';
-import {
-  Platform,
-  StatusBar,
-  View,
-} from 'react-native';
+import React, { Component } from 'react';
 import {
   AppLoading,
   Asset,
@@ -12,11 +7,10 @@ import {
 } from 'expo';
 import { Provider } from 'react-redux';
 
-import AppNavigator from './navigation/AppNavigator';
+import GlobalNavigator from './navigation/GlobalNavigator';
 import store from './store';
-import styles from './styles/App';
 
-export default class App extends React.Component {
+export default class App extends Component {
   state = {
     isLoadingComplete: false,
   };
@@ -61,10 +55,7 @@ export default class App extends React.Component {
     }
     return (
       <Provider store={store}>
-        <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          <AppNavigator />
-        </View>
+        <GlobalNavigator />
       </Provider>
     );
   }
