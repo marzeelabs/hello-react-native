@@ -1,0 +1,61 @@
+//
+// Colors palette
+// Add your own color groups and variations
+// Call them using the color function
+// @see _functions.scss
+//
+
+$palette: (
+  black: (
+    base: rgb(0, 0, 0) // #000
+  ),
+
+  grey: (
+    light: rgb(237, 237, 237), // #EDEDED
+    high-light: rgb(204, 204, 204),
+    mid-light: rgb(179, 179, 179), // #B3B3B3
+    mid-dark: rgb(96, 100, 109),
+    base: rgb(77, 77, 77), // #4D4D4D
+  ),
+
+  blue: (
+    base: rgb(85, 188, 224), // #55BCE0
+  ),
+
+  brand: (
+    complementary: rgb(251, 174, 49), // #fbae31
+    dark: rgb(0, 115, 130), // #007382
+    base: rgb(77, 77, 77), // #4D4D4D
+    light: rgb(68, 193, 193), // #44c1c1
+    blue: rgb(47, 149, 220),
+  ),
+
+  white: (
+    base: rgb(255, 255, 255), // #fff
+    impure: rgb(251, 251, 251),
+  ),
+);
+
+//
+// Breakpoints
+//
+
+$mq-breakpoints: (
+  break-extra-small: 400px,
+  break-small: 480px,
+  break-small-large: 520px,
+  break-medium-small: 600px,
+  break-medium: 730px,
+  break-medium-large: 820px,
+  break-large: 980px,
+  break-big: 1200px,
+  break-bigger: 1440px,
+  break-huge: 2000px
+);
+
+//
+// For JS constants
+//
+
+.js-constant__brand--blue { color: color(brand, blue); }
+.js-constant__grey--high-light { color: color(grey, high-light); }

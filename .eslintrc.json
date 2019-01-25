@@ -21,7 +21,6 @@
     "no-underscore-dangle": 0,
     "no-useless-constructor": 0,
     "react/jsx-curly-spacing": { "when": "always" },
-    "react/jsx-filename-extension": 0,
     "react/prefer-stateless-function": 0,
     "react/prop-types": 0,
     "wrap-iife": 0
@@ -33,10 +32,17 @@
     "import/parser": "babel-eslint",
     "import/resolver": {
       "node": {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".json",
+          ".scss"
+        ],
         "paths": [
           "components",
           "navigation",
-          "screens"
+          "screens",
+          "scss"
         ]
       }
     }

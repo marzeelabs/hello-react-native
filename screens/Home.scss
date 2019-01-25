@@ -1,0 +1,82 @@
+.home__container {
+  flex: 1;
+  background-color: color(white);
+}
+
+.home__mode-text {
+  color: rgba(color(black), .4);
+  font-size: 14px;
+  line-height: 19px;
+  text-align: center;
+}
+
+.home__content-container {
+  padding-top: 30px;
+}
+
+.home__welcome-container {
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.home__welcome-image {
+  width: 100px;
+  height: 80px;
+  resize-mode: contain;
+  margin-top: 3px;
+  margin-left: -10px;
+}
+
+.home__mz-image {
+  width: 200px;
+  height: 200px;
+  resize-mode: contain;
+}
+
+.home__mz-text {
+  font-size: 17px;
+  color: rgba(color(grey, mid-dark), 1);
+  line-height: 24px;
+  text-align: center;
+}
+
+.home__inner-container {
+  align-items: center;
+  margin: 0 50px 20px;
+}
+
+.home__code-highlight-text {
+  color: rgba(color(grey, mid-dark), .8);
+}
+
+.home__code-highlight-container {
+  background-color: rgba(color(black), .05);
+  border-radius: 3px;
+  padding: 0 4px;
+}
+
+.home__tab-bar-info-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  align-items: center;
+  background-color: color(white, impure);
+  padding: 20px 0;
+}
+
+.home__tab-bar-info-text {
+  font-size: 17px;
+  color: rgba(color(grey, mid-dark), 1);
+  text-align: center;
+}
+
+.home__tab-bar-info-filename {
+  margin-top: 5px;
+}
+
+.home__help-text {
+  font-size: 14px;
+  color: #2e78b7;
+}

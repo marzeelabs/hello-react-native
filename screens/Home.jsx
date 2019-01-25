@@ -11,8 +11,11 @@ import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
 import SignOut from '../components/SignOut';
-import styles from './styles/Home';
 import TabBarIcon from '../components/TabBarIcon';
+
+import './Home.scss';
+
+const cns = 'home';
 
 export default class HomeScreen extends Component {
   static navigationOptions = {
@@ -45,23 +48,23 @@ export default class HomeScreen extends Component {
   _maybeRenderDevelopmentModeWarning() {
     if (__DEV__) {
       return (
-        <View style={styles.getStartedContainer}>
-          <Text style={styles.developmentModeText}>
+        <View styleName={`${cns}__inner-container`}>
+          <Text styleName={`${cns}__mode-text`}>
             Development mode is enabled, your app will be slower but you can use useful development
             tools.
             {' '}
-            <Text onPress={this._handleLearnMorePress} style={styles.helpLinkText}>
+            <Text onPress={this._handleLearnMorePress} styleName={`${cns}__help-text`}>
               Learn more
             </Text>
           </Text>
           <TouchableOpacity onPress={this._handleHelpPress}>
-            <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
+            <Text styleName={`${cns}__help-text`}>Help, it didn’t automatically reload!</Text>
           </TouchableOpacity>
         </View>
       );
     }
     return (
-      <Text style={styles.developmentModeText}>
+      <Text styleName={`${cns}__mode-text`}>
           You are not in development mode, your app will run at full speed.
       </Text>
     );
@@ -69,29 +72,29 @@ export default class HomeScreen extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-          <View style={styles.welcomeContainer}>
+      <View className="test" styleName={`${cns}__container`}>
+        <ScrollView styleName={`${cns}__content-container`}>
+          <View styleName={`${cns}__welcome-container`}>
             <Image
               source={
                 __DEV__
                   ? require('../assets/images/robot-dev.png')
                   : require('../assets/images/robot-prod.png')
               }
-              style={styles.welcomeImage}
+              styleName={`${cns}__welcome-image`}
             />
           </View>
           { this._maybeRenderDevelopmentModeWarning() }
 
-          <View style={styles.getStartedContainer}>
+          <View styleName={`${cns}__inner-container`}>
             <Image
               source={
                 require('../assets/images/0.png')
               }
-              style={styles.mzImage}
+              styleName={`${cns}__mz-image`}
             />
 
-            <Text style={styles.getStartedText}>
+            <Text styleName={`${cns}__mz-text`}>
               Hello Marzee Labs people!
             </Text>
           </View>
@@ -99,11 +102,11 @@ export default class HomeScreen extends Component {
           <SignOut />
         </ScrollView>
 
-        <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
+        <View styleName={`${cns}__tab-bar-info-container`}>
+          <Text styleName={`${cns}__tab-bar-info-text`}>This is a tab bar. You can edit it in:</Text>
 
-          <View style={[ styles.codeHighlightContainer, styles.navigationFilename ]}>
-            <MonoText style={styles.codeHighlightText}>navigation/MainTabNavigator.js</MonoText>
+          <View styleName={`${cns}__code-highlight-container ${cns}__tab-bar-info-filename`}>
+            <MonoText styleName={`${cns}__code-highlight-text`}>navigation/MainTabNavigator.js</MonoText>
           </View>
         </View>
       </View>

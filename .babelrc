@@ -1,0 +1,18 @@
+{
+  "presets": ["module:metro-react-native-babel-preset"],
+  "plugins": [
+    "react-native-classname-to-style",
+    [
+      "react-native-stylename-to-style",
+      {
+        "extensions": ["scss"]
+      }
+    ],
+    [
+      "./transformers/react-native-platform-specific-incremental-extensions.js",
+      {
+        "extensions": ["scss"]
+      }
+    ]
+  ]
+}
