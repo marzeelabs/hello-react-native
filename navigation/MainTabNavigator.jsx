@@ -7,6 +7,8 @@ import HomeScreen from '../screens/Home';
 import LinksScreen from '../screens/Links';
 import SettingsScreen from '../screens/Settings';
 
+import styles from './MainTabNavigator.scss';
+
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
 });
@@ -57,4 +59,10 @@ export default createBottomTabNavigator({
   HomeStack,
   LinksStack,
   SettingsStack,
+}, {
+  initialRouteName: 'HomeStack',
+  tabBarOptions: {
+    activeBackgroundColor: '#0000FF',
+    style: styles['tab-bar'],
+  },
 });

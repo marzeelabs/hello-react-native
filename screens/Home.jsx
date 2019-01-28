@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   Image,
-  Platform,
   ScrollView,
   Text,
   TouchableOpacity,
@@ -11,7 +10,6 @@ import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
 import SignOut from '../components/SignOut';
-import TabBarIcon from '../components/TabBarIcon';
 
 import './Home.scss';
 
@@ -19,18 +17,7 @@ const cns = 'home';
 
 export default class HomeScreen extends Component {
   static navigationOptions = {
-    header: null,
-    tabBarLabel: 'Home',
-    tabBarIcon: ({ focused }) => (
-      <TabBarIcon
-        focused={focused}
-        name={
-          Platform.OS === 'ios'
-            ? `ios-information-circle${focused ? '' : '-outline'}`
-            : 'md-information-circle'
-        }
-      />
-    ),
+    title: 'Home',
   };
 
   _handleLearnMorePress() {
@@ -72,7 +59,7 @@ export default class HomeScreen extends Component {
 
   render() {
     return (
-      <View className="test" styleName={`${cns}__container`}>
+      <View styleName={`${cns}__container`}>
         <ScrollView styleName={`${cns}__content-container`}>
           <View styleName={`${cns}__welcome-container`}>
             <Image
