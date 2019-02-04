@@ -7,7 +7,16 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
+import styles from './AuthLoading.scss';
+
+const cns = 'auth-loading';
+
 class AuthLoadingScreen extends Component {
+  static navigationOptions = {
+    title: 'Hold on...',
+    header: null,
+  };
+
   componentDidMount() {
     this._bootstrapAsync();
   }
@@ -30,9 +39,11 @@ class AuthLoadingScreen extends Component {
   // Render any loading content that you like here
   render() {
     return (
-      <View>
-        <ActivityIndicator />
-        <StatusBar barStyle="default" />
+      <View style={styles[`${cns}__container`]}>
+        <View>
+          <ActivityIndicator />
+          <StatusBar barStyle="default" />
+        </View>
       </View>
     );
   }
