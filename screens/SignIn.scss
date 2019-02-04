@@ -1,17 +1,25 @@
-.sign-in__container {
+.sign-in__wrapper {
   flex: 1;
   justify-content: center;
   padding: 0 50px 20px;
+}
+
+.sign-in__container {
+  margin: 15px 0;
 }
 
 .sign-in__input {
   text-align: center;
 }
 
-.sign-in__input-container {
-  margin: 15px 0;
+.sign-in__input-container--error {
+  border-color: $c-red;
 }
 
 .sign-in__btn {
   margin: 15px 0;
+}
+
+.sign-in__input--error {
+  color: $c-red;
 }

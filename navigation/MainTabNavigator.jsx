@@ -62,7 +62,7 @@ export default createBottomTabNavigator({
 }, {
   initialRouteName: 'HomeStack',
   tabBarOptions: {
-    activeBackgroundColor: '#0000FF',
+    activeBackgroundColor: styles['tab-bar__item--active'].backgroundColor,
     style: styles['tab-bar'],
   },
 });

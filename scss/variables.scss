@@ -1,40 +1,69 @@
 //
 // Colors palette
-// Add your own color groups and variations
-// Call them using the color function
-// @see _functions.scss
 //
 
-$palette: (
-  black: (
-    base: rgb(0, 0, 0) // #000
-  ),
+$c-black: rgb(0, 0, 0);
 
-  grey: (
-    light: rgb(237, 237, 237), // #EDEDED
-    high-light: rgb(204, 204, 204),
-    mid-light: rgb(179, 179, 179), // #B3B3B3
-    mid-dark: rgb(96, 100, 109),
-    base: rgb(77, 77, 77), // #4D4D4D
-  ),
+$c-grey-light: rgb(237, 237, 237);
+$c-grey-high-light: rgb(204, 204, 204);
+$c-grey-mid-light: rgb(179, 179, 179);
+$c-grey-mid-dark: rgb(96, 100, 109);
+$c-grey: rgb(77, 77, 77);
 
-  blue: (
-    base: rgb(85, 188, 224), // #55BCE0
-  ),
+$c-blue: rgb(85, 188, 224);
+$c-blue-mid-dark: rgb(46, 120, 183);
 
-  brand: (
-    complementary: rgb(251, 174, 49), // #fbae31
-    dark: rgb(0, 115, 130), // #007382
-    base: rgb(77, 77, 77), // #4D4D4D
-    light: rgb(68, 193, 193), // #44c1c1
-    blue: rgb(47, 149, 220),
-  ),
+$c-green: rgb(0, 212, 0);
 
-  white: (
-    base: rgb(255, 255, 255), // #fff
-    impure: rgb(251, 251, 251),
-  ),
-);
+$c-brand: rgb(77, 77, 77);
+$c-brand-complementary: rgb(251, 174, 49);
+$c-brand-dark: rgb(0, 115, 130);
+$c-brand-light: rgb(68, 193, 193);
+$c-brand-blue: rgb(47, 149, 220);
+
+$c-white: rgb(255, 255, 255);
+$c-white-impure: rgb(251, 251, 251);
+
+$c-red: rgb(212, 0, 0);
+
+// $palette: (
+//   black: (
+//     base: rgb(0, 0, 0) // #000
+//   ),
+//
+//   grey: (
+//     light: rgb(237, 237, 237), // #EDEDED
+//     high-light: rgb(204, 204, 204),
+//     mid-light: rgb(179, 179, 179), // #B3B3B3
+//     mid-dark: rgb(96, 100, 109),
+//     base: rgb(77, 77, 77), // #4D4D4D
+//   ),
+//
+//   blue: (
+//     base: rgb(85, 188, 224), // #55BCE0
+//   ),
+//
+//   green: (
+//     base: rgb(0, 212, 0),
+//   ),
+//
+//   brand: (
+//     complementary: rgb(251, 174, 49), // #fbae31
+//     dark: rgb(0, 115, 130), // #007382
+//     base: rgb(77, 77, 77), // #4D4D4D
+//     light: rgb(68, 193, 193), // #44c1c1
+//     blue: rgb(47, 149, 220),
+//   ),
+//
+//   white: (
+//     base: rgb(255, 255, 255), // #fff
+//     impure: rgb(251, 251, 251),
+//   ),
+//
+//   red: (
+//     base: rgb(212, 0, 0),
+//   ),
+// );
 
 //
 // Breakpoints
@@ -52,10 +81,3 @@ $mq-breakpoints: (
   break-bigger: 1440px,
   break-huge: 2000px
 );
-
-//
-// For JS constants
-//
-
-.js-constant__brand--blue { color: color(brand, blue); }
-.js-constant__grey--high-light { color: color(grey, high-light); }

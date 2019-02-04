@@ -19,36 +19,114 @@ class SignIn extends Component {
     header: null,
   };
 
+  inputs = {
+    username: null,
+    password: null,
+  };
+
+  state = {
+    usernameValue: '',
+    usernameShake: false,
+
+    passwordValue: '',
+    passwordShake: false,
+  };
+
   _signInAsync = async () => {
     const {
       login,
       navigation,
     } = this.props;
 
+    const {
+      username,
+      password,
+    } = this.inputs;
+
+    const {
+      usernameValue,
+      usernameShake,
+      passwordValue,
+      passwordShake,
+    } = this.state;
+
+    const newState = {};
+
+    if (!usernameValue !== usernameShake) {
+      newState.usernameShake = !usernameValue;
+    }
+
+    if (!passwordValue !== passwordShake) {
+      newState.passwordShake = !passwordShake;
+    }
+
+    if (Object.keys(newState).length) {
+      this.setState(newState);
+    }
+
+    if (usernameValue && passwordValue) {
+      login('yay');
+    }
+    else {
+      if (!usernameValue) {
+        username.shake();
+      }
+      if (!passwordValue) {
+        password.shake();
+      }
+    }
+
     // await AsyncStorage.setItem('userToken', 'abc');
-    login('yay');
 
     // navigation.navigate('Main');
   };
 
   render() {
+    const {
+      usernameShake,
+      passwordShake,
+    } = this.state;
+
+    const usernameProps = {
+      containerStyle: [ styles['sign-in__container'] ],
+      inputStyle: [ styles['sign-in__input'] ],
+      inputContainerStyle: [],
+    };
+
+    const passwordProps = {
+      containerStyle: [ styles['sign-in__container'] ],
+      inputStyle: [ styles['sign-in__input'] ],
+      inputContainerStyle: [],
+    };
+
+    if (usernameShake) {
+      usernameProps.inputContainerStyle.push(styles['sign-in__input-container--error']);
+      usernameProps.placeholderTextColor = styles['sign-in__input--error'].color;
+    }
+    if (passwordShake) {
+      passwordProps.inputContainerStyle.push(styles['sign-in__input-container--error']);
+      passwordProps.placeholderTextColor = styles['sign-in__input--error'].color;
+    }
+
     return (
-      <View style={styles['sign-in__container']}>
+      <View style={styles['sign-in__wrapper']}>
         <View>
           <Input
             autoComplete="username"
             textContentType="username"
-            containerStyle={styles['sign-in__input-container']}
-            inputStyle={styles['sign-in__input']}
             placeholder="Username"
+            onChangeText={text => this.setState({ usernameValue: text })}
+            ref={(ref) => { this.inputs.username = ref; }}
+            {...usernameProps}
           />
           <Input
             autoComplete="password"
             textContentType="password"
             secureTextEntry
-            containerStyle={styles['sign-in__input-container']}
-            inputStyle={styles['sign-in__input']}
             placeholder="Password"
+            onChangeText={text => this.setState({ passwordValue: text })}
+            ref={(ref) => { this.inputs.password = ref; }}
+            {...passwordProps}
           />
           <Button
             buttonStyle={styles['sign-in__btn']}

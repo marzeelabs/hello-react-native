@@ -1,5 +1,13 @@
 .tab-bar__icon {
   margin-bottom: -3px;
-  background-color: red;
-  color: green;
+  background-color: $c-red;
+  color: $c-green;
+}
+
+.tab-bar__icon-text {
+  color: $c-grey-high-light;
+}
+
+.tab-bar__icon-text--focused {
+  color: $c-brand-blue;
 }

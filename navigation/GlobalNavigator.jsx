@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 
 import AppNavigator from './AppNavigator';
 
-import style from './GlobalNavigator.scss';
+import styles from './GlobalNavigator.scss';
 
 class GlobalNavigator extends Component {
   componentDidUpdate() {
@@ -33,7 +33,7 @@ class GlobalNavigator extends Component {
 
   render() {
     return (
-      <View style={style['global-navigator__container']}>
+      <View style={styles['global-navigator__container']}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
         <AppNavigator ref={(nav) => { this.navigator = nav; }} />
       </View>
