@@ -7,9 +7,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
-import styles from './AuthLoading.scss';
-
-const cns = 'auth-loading';
+import style from './AuthLoading.scss';
 
 class AuthLoadingScreen extends Component {
   static navigationOptions = {
@@ -39,7 +37,7 @@ class AuthLoadingScreen extends Component {
   // Render any loading content that you like here
   render() {
     return (
-      <View style={styles[`${cns}__container`]}>
+      <View style={style['auth-loading__container']}>
         <View>
           <ActivityIndicator />
           <StatusBar barStyle="default" />

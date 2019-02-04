@@ -4,9 +4,7 @@ import {
 } from 'react-native';
 import { ExpoLinksView } from '@expo/samples';
 
-import './Links.scss';
-
-const cns = 'links';
+import style from './Links.scss';
 
 export default class LinksScreen extends React.Component {
   static navigationOptions = {
@@ -15,7 +13,7 @@ export default class LinksScreen extends React.Component {
 
   render() {
     return (
-      <ScrollView styleName={`${cns}__container`}>
+      <ScrollView style={style.links__container}>
         {/* Go ahead and delete ExpoLinksView and replace it with your
            * content, we just wanted to provide you with some helpful links */}
         <ExpoLinksView />

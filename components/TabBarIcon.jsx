@@ -1,8 +1,8 @@
 import React from 'react';
 import { Icon } from 'expo';
 
-import './TabBarIcon.scss';
-import styles from '../scss/variables';
+import style from './TabBarIcon.scss';
+import variables from '../scss/variables';
 
 export default class TabBarIcon extends React.Component {
   render() {
@@ -12,14 +12,14 @@ export default class TabBarIcon extends React.Component {
     } = this.props;
 
     const color = focused
-      ? styles['js-constant__brand--blue'].color
-      : styles['js-constant__grey--high-light'].color;
+      ? variables['js-constant__brand--blue'].color
+      : variables['js-constant__grey--high-light'].color;
 
     return (
       <Icon.Ionicons
         name={name}
         size={26}
-        styleName="tab-bar__icon"
+        style={style['tab-bar__icon']}
         color={color}
       />
     );

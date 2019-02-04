@@ -16,8 +16,6 @@
     "@expo/samples": "2.1.1",
     "app-root-path": "^2.1.0",
     "babel-eslint": "^10.0.1",
-    "babel-plugin-react-native-classname-to-style": "^1.2.2",
-    "babel-plugin-react-native-stylename-to-style": "^0.13.0",
     "css-to-react-native-transform": "^1.8.0",
     "deepmerge": "^3.1.0",
     "eslint": "^5.12.0",
