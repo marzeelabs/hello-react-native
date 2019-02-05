@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  AsyncStorage,
+  // AsyncStorage,
   View,
 } from 'react-native';
 import {
@@ -8,8 +8,9 @@ import {
   Input,
 } from 'react-native-elements';
 import { connect } from 'react-redux';
+import FlashMessage from 'react-native-flash-message';
 
-import { actionLogin } from '../actions/auth';
+import auth from '../actions/auth';
 
 import styles from './SignIn.scss';
 
@@ -30,12 +31,72 @@ class SignIn extends Component {
 
     passwordValue: '',
     passwordShake: false,
+
+    lastError: 0,
+  };
+
+  componentDidMount() {
+    this.getInputDefaults();
+    this.checkForError();
+  }
+
+  componentDidUpdate() {
+    this.checkForError();
+  }
+
+  getInputDefaults = () => {
+    const {
+      usernamePreviousValue,
+      passwordPreviousValue,
+    } = this.props;
+
+    if (usernamePreviousValue || passwordPreviousValue) {
+      const newState = {};
+
+      if (usernamePreviousValue) {
+        newState.usernameValue = usernamePreviousValue;
+      }
+
+      if (passwordPreviousValue) {
+        newState.passwordValue = passwordPreviousValue;
+      }
+
+      this.setState(newState);
+    }
+  }
+
+  checkForError = () => {
+    const {
+      error,
+    } = this.props;
+
+    const {
+      lastError,
+    } = this.state;
+
+    if (error && error.timestamp > lastError) {
+      this.setState({
+        lastError: error.timestamp,
+      }, () => {
+        this.flashMessage.showMessage({
+          message: error.message,
+          autoHide: true,
+          canRegisterAsDefault: false,
+          duration: 4000,
+          floating: true,
+          hideOnPress: false,
+          icon: 'auto',
+          position: 'top',
+          type: 'warning',
+        });
+      });
+    }
   };
 
   _signInAsync = async () => {
     const {
       login,
-      navigation,
+      // navigation,
     } = this.props;
 
     const {
@@ -65,7 +126,10 @@ class SignIn extends Component {
     }
 
     if (usernameValue && passwordValue) {
-      login('yay');
+      login({
+        username: usernameValue,
+        password: passwordValue,
+      });
     }
     else {
       if (!usernameValue) {
@@ -86,6 +150,11 @@ class SignIn extends Component {
       usernameShake,
       passwordShake,
     } = this.state;
+
+    const {
+      usernamePreviousValue,
+      passwordPreviousValue,
+    } = this.props;
 
     const usernameProps = {
       containerStyle: [ styles['sign-in__container'] ],
@@ -115,32 +184,44 @@ class SignIn extends Component {
             autoComplete="username"
             textContentType="username"
             placeholder="Username"
+            defaultValue={usernamePreviousValue || ''}
             onChangeText={text => this.setState({ usernameValue: text })}
             ref={(ref) => { this.inputs.username = ref; }}
             {...usernameProps}
           />
+
           <Input
             autoComplete="password"
             textContentType="password"
             secureTextEntry
             placeholder="Password"
+            defaultValue={passwordPreviousValue || ''}
             onChangeText={text => this.setState({ passwordValue: text })}
             ref={(ref) => { this.inputs.password = ref; }}
             {...passwordProps}
           />
+
           <Button
             buttonStyle={styles['sign-in__btn']}
             title="Sign in!"
             onPress={this._signInAsync}
           />
         </View>
+
+        <FlashMessage ref={(ref) => { this.flashMessage = ref; }} />
       </View>
     );
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  login: token => dispatch(actionLogin(token)),
+const mapStateToProps = state => ({
+  error: state.auth.error,
+  usernamePreviousValue: state.auth.username,
+  passwordPreviousValue: state.auth.password,
 });
 
-export default connect(null, mapDispatchToProps)(SignIn);
+const mapDispatchToProps = dispatch => ({
+  login: authData => dispatch(auth.login(authData)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

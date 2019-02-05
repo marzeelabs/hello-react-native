@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
-import { actionLogout } from '../actions/auth';
+import auth from '../actions/auth';
 
 class SignOut extends PureComponent {
   onPress = () => {
@@ -29,7 +29,7 @@ class SignOut extends PureComponent {
 }
 
 const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(actionLogout()),
+  logout: () => dispatch(auth.logout()),
 });
 
 export default connect(null, mapDispatchToProps)(SignOut);

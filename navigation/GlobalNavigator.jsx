@@ -13,12 +13,18 @@ import styles from './GlobalNavigator.scss';
 
 class GlobalNavigator extends Component {
   componentDidUpdate() {
-    const { token } = this.props;
+    const {
+      loading,
+      token,
+    } = this.props;
 
     if (this.navigator) {
       const action = {};
 
-      if (token === null) {
+      if (loading) {
+        action.routeName = 'AuthLoading';
+      }
+      else if (!token) {
         action.routeName = 'Auth';
       }
       else {
@@ -42,6 +48,7 @@ class GlobalNavigator extends Component {
 }
 
 const mapStateToProps = state => ({
+  loading: state.auth.loading,
   token: state.auth.token,
 });
 

@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import {
   ActivityIndicator,
-  AsyncStorage,
+  // AsyncStorage,
   StatusBar,
   View,
 } from 'react-native';
 import { connect } from 'react-redux';
+
+import auth from '../actions/auth';
 
 import styles from './AuthLoading.scss';
 
@@ -16,22 +18,47 @@ class AuthLoadingScreen extends Component {
   };
 
   componentDidMount() {
-    this._bootstrapAsync();
+    this.bootstrapAsync();
   }
 
   // Fetch the token from storage then navigate to our appropriate place
-  _bootstrapAsync = async () => {
+  bootstrapAsync = async () => {
     const {
-      navigation,
+      // navigation,
+      username,
+      password,
       token,
+
+      error,
+      greet,
+      setToken,
+      tokenValid,
     } = this.props;
+
+    if (token) {
+      tokenValid();
+      return;
+    }
+
+    if (username && password) {
+      if (username === 'testuser' && password === 'test') {
+        setToken('yay');
+        return;
+      }
+
+      error('The username or password do not match.');
+      return;
+    }
+
+    greet();
+
     // const userToken = await AsyncStorage.getItem('userToken');
 
     // This will switch to the Main screen or Auth screen and this loading
     // screen will be unmounted and thrown away.
     // navigation.navigate(userToken ? 'Main' : 'Auth');
 
-    navigation.navigate(token === null ? 'Auth' : 'Main');
+    // navigation.navigate(token === null ? 'Auth' : 'Main');
   };
 
   // Render any loading content that you like here
@@ -48,7 +75,16 @@ class AuthLoadingScreen extends Component {
 }
 
 const mapStateToProps = state => ({
+  username: state.auth.username,
+  password: state.auth.password,
   token: state.auth.token,
 });
 
-export default connect(mapStateToProps)(AuthLoadingScreen);
+const mapDispatchToProps = dispatch => ({
+  error: payload => dispatch(auth.error(payload)),
+  greet: () => dispatch(auth.greet()),
+  setToken: payload => dispatch(auth.setToken(payload)),
+  tokenValid: () => dispatch(auth.tokenValid()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AuthLoadingScreen);

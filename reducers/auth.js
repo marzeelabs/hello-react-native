@@ -1,4 +1,6 @@
 const initialState = {
+  username: null,
+  password: null,
   token: null,
   loading: true,
   error: null,
@@ -19,14 +21,44 @@ export default (state = initialState, action) => {
 
     case 'AUTH_LOGIN':
       return {
-        ...state,
-        token: action.payload,
+        ...initialState,
+        username: action.payload.username,
+        password: action.payload.password,
+        loading: true,
+        error: null,
       };
 
     case 'AUTH_LOGOUT':
+      return initialState;
+
+    case 'AUTH_TOKEN_VALID':
       return {
         ...state,
-        token: null,
+        loading: false,
+      };
+
+    case 'AUTH_SET_TOKEN':
+      return {
+        ...state,
+        token: action.payload,
+        loading: false,
+        error: null,
+      };
+
+    case 'AUTH_ERROR':
+      return {
+        ...state,
+        error: {
+          message: action.payload,
+          timestamp: Date.now(),
+        },
+        loading: false,
+      };
+
+    case 'AUTH_GREET':
+      return {
+        ...state,
+        loading: false,
       };
   }
 
