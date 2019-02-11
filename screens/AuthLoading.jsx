@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
-import auth from '../actions/auth';
+import auth, { getStoredToken } from '../actions/auth';
 import remote from '../components/remote';
 import processResponse from '../components/processResponse';
 
@@ -35,6 +35,16 @@ class AuthLoadingScreen extends Component {
       greet,
       setJWToken,
     } = this.props;
+
+    if (!jwToken && !username && !password) {
+      // We may be just opening the app for the first time, see if there's an
+      // access token in the device storage that we can use.
+      const storedToken = await getStoredToken();
+
+      if (storedToken) {
+        return setJWToken(storedToken);
+      }
+    }
 
     if (jwToken) {
       return finish();

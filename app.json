@@ -16,6 +16,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "extra": {
+      "storagePrefix": "MZDrupal"
+    },
     "updates": {
       "fallbackToCacheTimeout": 0
     },

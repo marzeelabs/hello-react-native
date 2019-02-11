@@ -1,3 +1,12 @@
+import {
+  Constants,
+  SecureStore,
+} from 'expo';
+
+const tokenKeyName = `${Constants.manifest.extra.storagePrefix}__jwToken`;
+
+export const getStoredToken = () => SecureStore.getItemAsync(tokenKeyName);
+
 export default {
   login: payload => (dispatch) => {
     // const promise = new Promise((resolve) => {
@@ -15,17 +24,11 @@ export default {
   },
 
   logout: () => (dispatch) => {
-    // const promise = new Promise((resolve) => {
-    //   resolve();
-    // });
+    SecureStore.deleteItemAsync(tokenKeyName);
 
-    // promise.then(() => {
     dispatch({
       type: 'AUTH_LOGOUT',
     });
-    // });
-
-    // return promise;
   },
 
   finish: () => (dispatch) => {
@@ -35,6 +38,8 @@ export default {
   },
 
   setJWToken: payload => (dispatch) => {
+    SecureStore.setItemAsync(tokenKeyName, payload);
+
     dispatch({
       type: 'AUTH_SET_JWTOKEN',
       payload,
