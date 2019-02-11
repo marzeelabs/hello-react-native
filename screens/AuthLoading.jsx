@@ -6,6 +6,7 @@ import {
   View,
 } from 'react-native';
 import { connect } from 'react-redux';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 import auth, { getStoredToken } from '../actions/auth';
 import remote from '../components/remote';
@@ -83,7 +84,14 @@ class AuthLoadingScreen extends Component {
     return (
       <View style={styles['auth-loading__container']}>
         <View>
-          <ActivityIndicator />
+          <Spinner
+            visible
+            textContent="Loading..."
+            size="large"
+            color={styles['auth-loading__spinner'].color}
+            overlayColor={styles['auth-loading__spinner-overlay'].color}
+            textStyle={styles['auth-loading__spinner']}
+          />
           <StatusBar barStyle="default" />
         </View>
       </View>
