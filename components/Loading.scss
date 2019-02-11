@@ -1,12 +1,12 @@
-.auth-loading__container {
+.loading__container {
   flex: 1;
   justify-content: center;
 }
 
-.auth-loading__spinner {
+.loading__spinner {
   color: $c-brand-blue;
 }
 
-.auth-loading__spinner-overlay {
+.loading__spinner-overlay {
   color: rgba($c-brand-complementary, 0.25);
 }

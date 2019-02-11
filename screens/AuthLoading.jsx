@@ -1,18 +1,10 @@
 import React, { Component } from 'react';
-import {
-  ActivityIndicator,
-  // AsyncStorage,
-  StatusBar,
-  View,
-} from 'react-native';
 import { connect } from 'react-redux';
-import Spinner from 'react-native-loading-spinner-overlay';
 
 import auth, { getStoredToken } from '../actions/auth';
+import Loading from '../components/Loading';
 import remote from '../components/remote';
 import processResponse from '../components/processResponse';
-
-import styles from './AuthLoading.scss';
 
 class AuthLoadingScreen extends Component {
   static navigationOptions = {
@@ -75,26 +67,12 @@ class AuthLoadingScreen extends Component {
     }
 
     return greet();
-
-    // const userToken = await AsyncStorage.getItem('userToken');
   };
 
   // Render any loading content that you like here
   render() {
     return (
-      <View style={styles['auth-loading__container']}>
-        <View>
-          <Spinner
-            visible
-            textContent="Loading..."
-            size="large"
-            color={styles['auth-loading__spinner'].color}
-            overlayColor={styles['auth-loading__spinner-overlay'].color}
-            textStyle={styles['auth-loading__spinner']}
-          />
-          <StatusBar barStyle="default" />
-        </View>
-      </View>
+      <Loading textContent="Hold on..." />
     );
   }
 }
