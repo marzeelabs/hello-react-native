@@ -3,6 +3,7 @@
 
   "globals": {
     "__DEV__": true,
+    "fetch": true,
     "document": true,
     "name": true,
     "window": true

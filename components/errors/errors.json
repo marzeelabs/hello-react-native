@@ -1,0 +1,11 @@
+{
+  "auth": {
+    "prefix": "Authentication failed",
+    "knownMessages": [
+      [
+        "This route can only be accessed by authenticated users.",
+        "The username or password do not match."
+      ]
+    ]
+  }
+}

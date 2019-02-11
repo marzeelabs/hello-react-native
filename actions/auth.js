@@ -28,15 +28,15 @@ export default {
     // return promise;
   },
 
-  tokenValid: () => (dispatch) => {
+  finish: () => (dispatch) => {
     dispatch({
-      type: 'AUTH_TOKEN_VALID',
+      type: 'AUTH_FINISH',
     });
   },
 
-  setToken: payload => (dispatch) => {
+  setJWToken: payload => (dispatch) => {
     dispatch({
-      type: 'AUTH_SET_TOKEN',
+      type: 'AUTH_SET_JWTOKEN',
       payload,
     });
   },

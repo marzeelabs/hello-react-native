@@ -8,6 +8,8 @@ import {
 import { connect } from 'react-redux';
 
 import auth from '../actions/auth';
+import remote from '../components/remote';
+import processResponse from '../components/processResponse';
 
 import styles from './AuthLoading.scss';
 
@@ -24,41 +26,46 @@ class AuthLoadingScreen extends Component {
   // Fetch the token from storage then navigate to our appropriate place
   bootstrapAsync = async () => {
     const {
-      // navigation,
       username,
       password,
-      token,
+      jwToken,
 
-      error,
+      errorDispatch,
+      finish,
       greet,
-      setToken,
-      tokenValid,
+      setJWToken,
     } = this.props;
 
-    if (token) {
-      tokenValid();
-      return;
+    if (jwToken) {
+      return finish();
     }
 
     if (username && password) {
-      if (username === 'testuser' && password === 'test') {
-        setToken('yay');
-        return;
-      }
+      return remote({
+        path: '/api/token',
+        method: 'POST',
+        body: {
+          name: username,
+          pass: password,
+        },
+      })
+        .then(response => processResponse('auth', response, errorDispatch))
+        .then((responseJson) => {
+          if (responseJson !== false) {
+            setJWToken(responseJson.token);
+          }
+        })
+        .catch((ex) => {
+          // eslint-disable-next-line no-console
+          console.warning(ex);
 
-      error('The username or password do not match.');
-      return;
+          errorDispatch('An unknown error occurred.');
+        });
     }
 
-    greet();
+    return greet();
 
     // const userToken = await AsyncStorage.getItem('userToken');
-
-    // This will switch to the Main screen or Auth screen and this loading
-    // screen will be unmounted and thrown away.
-    // navigation.navigate(userToken ? 'Main' : 'Auth');
-
-    // navigation.navigate(token === null ? 'Auth' : 'Main');
   };
 
   // Render any loading content that you like here
@@ -77,14 +84,14 @@ class AuthLoadingScreen extends Component {
 const mapStateToProps = state => ({
   username: state.auth.username,
   password: state.auth.password,
-  token: state.auth.token,
+  jwToken: state.auth.jwToken,
 });
 
 const mapDispatchToProps = dispatch => ({
-  error: payload => dispatch(auth.error(payload)),
+  errorDispatch: payload => dispatch(auth.error(payload)),
+  finish: () => dispatch(auth.finish()),
   greet: () => dispatch(auth.greet()),
-  setToken: payload => dispatch(auth.setToken(payload)),
-  tokenValid: () => dispatch(auth.tokenValid()),
+  setJWToken: payload => dispatch(auth.setJWToken(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthLoadingScreen);

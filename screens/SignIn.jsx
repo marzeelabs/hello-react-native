@@ -96,7 +96,6 @@ class SignIn extends Component {
   _signInAsync = async () => {
     const {
       login,
-      // navigation,
     } = this.props;
 
     const {
@@ -141,8 +140,6 @@ class SignIn extends Component {
     }
 
     // await AsyncStorage.setItem('userToken', 'abc');
-
-    // navigation.navigate('Main');
   };
 
   render() {

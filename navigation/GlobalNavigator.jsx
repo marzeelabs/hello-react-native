@@ -15,7 +15,7 @@ class GlobalNavigator extends Component {
   componentDidUpdate() {
     const {
       loading,
-      token,
+      jwToken,
     } = this.props;
 
     if (this.navigator) {
@@ -24,7 +24,7 @@ class GlobalNavigator extends Component {
       if (loading) {
         action.routeName = 'AuthLoading';
       }
-      else if (!token) {
+      else if (!jwToken) {
         action.routeName = 'Auth';
       }
       else {
@@ -49,7 +49,7 @@ class GlobalNavigator extends Component {
 
 const mapStateToProps = state => ({
   loading: state.auth.loading,
-  token: state.auth.token,
+  jwToken: state.auth.jwToken,
 });
 
 export default connect(mapStateToProps)(GlobalNavigator);
