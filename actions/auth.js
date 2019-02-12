@@ -5,8 +5,6 @@ import {
 
 const tokenKeyName = `${Constants.manifest.extra.storagePrefix}__jwToken`;
 
-export const getStoredToken = () => SecureStore.getItemAsync(tokenKeyName);
-
 export default {
   login: payload => (dispatch) => {
     // const promise = new Promise((resolve) => {
@@ -17,6 +15,10 @@ export default {
     dispatch({
       type: 'AUTH_LOGIN',
       payload,
+    });
+
+    dispatch({
+      type: 'AUTHENTICATING',
     });
     // });
     //
@@ -31,11 +33,7 @@ export default {
     });
   },
 
-  finish: () => (dispatch) => {
-    dispatch({
-      type: 'AUTH_FINISH',
-    });
-  },
+  getJWTokenFromStorage: () => () => SecureStore.getItemAsync(tokenKeyName),
 
   setJWToken: payload => (dispatch) => {
     SecureStore.setItemAsync(tokenKeyName, payload);
@@ -44,18 +42,11 @@ export default {
       type: 'AUTH_SET_JWTOKEN',
       payload,
     });
-  },
 
-  error: payload => (dispatch) => {
     dispatch({
-      type: 'AUTH_ERROR',
-      payload,
+      type: 'LOADING_STOP',
     });
   },
 
-  greet: () => (dispatch) => {
-    dispatch({
-      type: 'AUTH_GREET',
-    });
-  },
+
 };

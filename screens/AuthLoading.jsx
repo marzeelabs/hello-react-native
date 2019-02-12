@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 
-import auth, { getStoredToken } from '../actions/auth';
-import Loading from '../components/Loading';
-import remote from '../components/remote';
-import processResponse from '../components/processResponse';
+import auth from '../actions/auth';
+import backend from '../actions/backend';
+import general from '../actions/general';
 
 class AuthLoadingScreen extends Component {
   static navigationOptions = {
@@ -21,73 +20,57 @@ class AuthLoadingScreen extends Component {
     const {
       username,
       password,
-      jwToken,
 
-      errorDispatch,
-      finish,
-      greet,
+      getJWTokenFromStorage,
+      loadingStop,
+      remote,
       setJWToken,
     } = this.props;
 
-    if (!jwToken && !username && !password) {
+    if (!username && !password) {
       // We may be just opening the app for the first time, see if there's an
       // access token in the device storage that we can use.
-      const storedToken = await getStoredToken();
+      const storedToken = await getJWTokenFromStorage();
 
       if (storedToken) {
         return setJWToken(storedToken);
       }
     }
 
-    if (jwToken) {
-      return finish();
-    }
-
     if (username && password) {
       return remote({
         path: '/api/token',
+        auth: true,
         method: 'POST',
         body: {
           name: username,
           pass: password,
         },
       })
-        .then(response => processResponse('auth', response, errorDispatch))
         .then((responseJson) => {
           if (responseJson !== false) {
             setJWToken(responseJson.token);
           }
-        })
-        .catch((ex) => {
-          // eslint-disable-next-line no-console
-          console.warning(ex);
-
-          errorDispatch('An unknown error occurred.');
         });
     }
 
-    return greet();
+    return loadingStop();
   };
 
-  // Render any loading content that you like here
   render() {
-    return (
-      <Loading textContent="Hold on..." />
-    );
+    return null;
   }
 }
 
 const mapStateToProps = state => ({
   username: state.auth.username,
   password: state.auth.password,
-  jwToken: state.auth.jwToken,
 });
 
-const mapDispatchToProps = dispatch => ({
-  errorDispatch: payload => dispatch(auth.error(payload)),
-  finish: () => dispatch(auth.finish()),
-  greet: () => dispatch(auth.greet()),
-  setJWToken: payload => dispatch(auth.setJWToken(payload)),
-});
+const actionCreators = {
+  ...auth,
+  ...backend,
+  ...general,
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(AuthLoadingScreen);
+export default connect(mapStateToProps, actionCreators)(AuthLoadingScreen);

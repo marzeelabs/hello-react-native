@@ -8,7 +8,6 @@ import {
   Input,
 } from 'react-native-elements';
 import { connect } from 'react-redux';
-import FlashMessage from 'react-native-flash-message';
 
 import auth from '../actions/auth';
 
@@ -31,17 +30,10 @@ class SignIn extends Component {
 
     passwordValue: '',
     passwordShake: false,
-
-    lastError: 0,
   };
 
   componentDidMount() {
     this.getInputDefaults();
-    this.checkForError();
-  }
-
-  componentDidUpdate() {
-    this.checkForError();
   }
 
   getInputDefaults = () => {
@@ -64,34 +56,6 @@ class SignIn extends Component {
       this.setState(newState);
     }
   }
-
-  checkForError = () => {
-    const {
-      error,
-    } = this.props;
-
-    const {
-      lastError,
-    } = this.state;
-
-    if (error && error.timestamp > lastError) {
-      this.setState({
-        lastError: error.timestamp,
-      }, () => {
-        this.flashMessage.showMessage({
-          message: error.message,
-          autoHide: true,
-          canRegisterAsDefault: false,
-          duration: 4000,
-          floating: true,
-          hideOnPress: false,
-          icon: 'auto',
-          position: 'top',
-          type: 'warning',
-        });
-      });
-    }
-  };
 
   _signInAsync = async () => {
     const {
@@ -204,21 +168,18 @@ class SignIn extends Component {
             onPress={this._signInAsync}
           />
         </View>
-
-        <FlashMessage ref={(ref) => { this.flashMessage = ref; }} />
       </View>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  error: state.auth.error,
   usernamePreviousValue: state.auth.username,
   passwordPreviousValue: state.auth.password,
 });
 
-const mapDispatchToProps = dispatch => ({
-  login: authData => dispatch(auth.login(authData)),
-});
+const mapDispatchToProps = {
+  ...auth,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

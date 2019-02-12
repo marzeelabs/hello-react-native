@@ -28,8 +28,8 @@ class SignOut extends PureComponent {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(auth.logout()),
-});
+const mapDispatchToProps = {
+  ...auth,
+};
 
 export default connect(null, mapDispatchToProps)(SignOut);

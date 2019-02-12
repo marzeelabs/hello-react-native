@@ -1,0 +1,6 @@
+[
+  [
+    "This route can only be accessed by authenticated users.",
+    "Authentication failed: the username or password do not match."
+  ]
+]
