@@ -39,7 +39,7 @@ class AuthLoadingScreen extends Component {
 
     if (username && password) {
       return remote({
-        path: '/api/token',
+        path: '/jwt/token',
         auth: true,
         method: 'POST',
         body: {

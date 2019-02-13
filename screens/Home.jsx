@@ -6,17 +6,41 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { connect } from 'react-redux';
 import { WebBrowser } from 'expo';
+
+import backend from '../actions/backend';
+import general from '../actions/general';
+import profile from '../actions/profile';
 
 import { MonoText } from '../components/StyledText';
 import SignOut from '../components/SignOut';
 
 import styles from './Home.scss';
 
-export default class HomeScreen extends Component {
+class HomeScreen extends Component {
   static navigationOptions = {
     title: 'Home',
   };
+
+  componentDidMount() {
+    const {
+      name,
+
+      loadingStart,
+      loadingStop,
+      remote,
+      setProfile,
+    } = this.props;
+
+    if (!name) {
+      loadingStart();
+
+      remote('/profile')
+        .then(setProfile)
+        .then(loadingStop);
+    }
+  }
 
   _handleLearnMorePress() {
     WebBrowser.openBrowserAsync(
@@ -48,6 +72,7 @@ export default class HomeScreen extends Component {
         </View>
       );
     }
+
     return (
       <Text style={styles['home__mode-text']}>
           You are not in development mode, your app will run at full speed.
@@ -56,6 +81,14 @@ export default class HomeScreen extends Component {
   }
 
   render() {
+    const {
+      name,
+    } = this.props;
+
+    if (!name) {
+      return null;
+    }
+
     return (
       <View style={styles.home__container}>
         <ScrollView style={styles['home__content-container']}>
@@ -80,7 +113,7 @@ export default class HomeScreen extends Component {
             />
 
             <Text style={styles['home__mz-text']}>
-              Hello Marzee Labs people!
+              {`Hello ${name}!`}
             </Text>
           </View>
 
@@ -98,3 +131,15 @@ export default class HomeScreen extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  name: state.profile.name,
+});
+
+const actionCreators = {
+  ...backend,
+  ...general,
+  ...profile,
+};
+
+export default connect(mapStateToProps, actionCreators)(HomeScreen);

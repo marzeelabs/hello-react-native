@@ -1,12 +1,7 @@
-.loading__container {
-  flex: 1;
-  justify-content: center;
-}
-
 .loading__spinner {
   color: $c-brand-blue;
 }
 
 .loading__spinner-overlay {
-  color: rgba($c-brand-complementary, 0.25);
+  color: rgba($c-brand-complementary, .25);
 }
