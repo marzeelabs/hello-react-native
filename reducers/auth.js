@@ -2,6 +2,7 @@ const initialState = {
   username: null,
   password: null,
   jwToken: null,
+  csrfToken: null,
 };
 
 export default (state = initialState, action) => {
@@ -24,6 +25,12 @@ export default (state = initialState, action) => {
         username: null,
         password: null,
         jwToken: action.payload,
+      };
+
+    case 'AUTH_SET_CSRFTOKEN':
+      return {
+        ...state,
+        csrfToken: action.payload,
       };
   }
 
