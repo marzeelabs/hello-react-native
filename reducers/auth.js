@@ -14,7 +14,9 @@ export default (state = initialState, action) => {
       };
 
     case 'AUTH_LOGOUT':
-      return initialState;
+      return {
+        ...initialState,
+      };
 
     case 'AUTH_SET_JWTOKEN':
       return {

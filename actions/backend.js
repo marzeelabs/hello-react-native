@@ -1,3 +1,6 @@
+import auth from './auth';
+import general from './general';
+
 // @TODO: find local IP in dev (needed?), use hardcoded address in prod
 const getHost = () => 'http://mzdrupal.lab';
 
@@ -35,52 +38,54 @@ export default {
           return response.json();
         }
 
+        switch (response.status) {
+          // Access denied means the user has been blocked or the token is
+          // invalid.
+          case 403:
+            auth.logout()(dispatch);
+            break;
+        }
+
         const responseJson = await response.json();
 
         if (responseJson.message) {
-          const errors = require('./errors/errors.json');
+          const errors = require('./errors/errors');
 
           // eslint-disable-next-line no-restricted-syntax
-          for (let message of errors) {
-            if (typeof message === 'string') {
-              message = [ message ];
+          for (let error of errors) {
+            if (typeof error === 'string') {
+              error = { message: error };
             }
 
-            if (message[0] === responseJson.message) {
-              const str = message[1] || responseJson.message;
+            if (error.message === responseJson.message) {
+              const state = getState();
 
-              dispatch({
-                type: 'ERROR',
-                payload: `${str}`,
-              });
+              const payload = error.replace
+                ? error.replace(response, state)
+                : responseJson.message;
+
+              general.error(payload)(dispatch);
 
               return false;
             }
           }
 
-          dispatch({
-            type: 'ERROR',
-            payload: `${responseJson.message}`,
-          });
+          general.error(responseJson.message)(dispatch);
 
           return false;
         }
 
-        dispatch({
-          type: 'ERROR',
-          payload: 'Unknown error!',
-        });
+        general.error('Unknown error!')(dispatch);
 
         return false;
       })
       .catch((ex) => {
         // eslint-disable-next-line no-console
-        console.warning(ex);
+        console.warn(ex);
 
-        dispatch({
-          type: 'ERROR',
-          payload: 'Unknown error!',
-        });
+        general.error('Unknown error!')(dispatch);
+
+        return false;
       });
   },
 };

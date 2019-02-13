@@ -37,7 +37,11 @@ class HomeScreen extends Component {
       loadingStart();
 
       remote('/profile')
-        .then(setProfile)
+        .then((responseJson) => {
+          if (responseJson !== false) {
+            setProfile(responseJson);
+          }
+        })
         .then(loadingStop);
     }
   }

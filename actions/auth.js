@@ -47,6 +47,4 @@ export default {
       type: 'LOADING_STOP',
     });
   },
-
-
 };
