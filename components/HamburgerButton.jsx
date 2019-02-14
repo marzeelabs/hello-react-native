@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import HeaderIcon from './HeaderIcon';
+import HeaderIcon from './HeaderIcon/HeaderIcon';
 
 export default class HamburgerButton extends Component {
   onPress = () => {

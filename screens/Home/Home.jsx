@@ -9,12 +9,12 @@ import {
 import { connect } from 'react-redux';
 import { WebBrowser } from 'expo';
 
-import backend from '../actions/backend';
-import general from '../actions/general';
-import profile from '../actions/profile';
+import backend from '../../actions/backend';
+import general from '../../actions/general';
+import profile from '../../actions/profile';
 
-import HamburgerButton from '../components/HamburgerButton';
-import { MonoText } from '../components/StyledText';
+import HamburgerButton from '../../components/HamburgerButton';
+import { MonoText } from '../../components/StyledText';
 
 import styles from './Home.scss';
 
@@ -101,8 +101,8 @@ class HomeScreen extends Component {
             <Image
               source={
                 __DEV__
-                  ? require('../assets/images/robot-dev.png')
-                  : require('../assets/images/robot-prod.png')
+                  ? require('../../assets/images/robot-dev.png')
+                  : require('../../assets/images/robot-prod.png')
               }
               style={styles['home__welcome-image']}
             />
@@ -112,7 +112,7 @@ class HomeScreen extends Component {
           <View style={styles['home__inner-container']}>
             <Image
               source={
-                require('../assets/images/0.png')
+                require('../../assets/images/0.png')
               }
               style={styles['home__mz-image']}
             />

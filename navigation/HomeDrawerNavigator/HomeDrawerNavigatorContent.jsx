@@ -8,11 +8,11 @@ import {
 } from 'react-navigation';
 import { connect } from 'react-redux';
 
-import TabBarIcon from '../components/TabBarIcon';
+import TabBarIcon from '../../components/TabBarIcon/TabBarIcon';
 
-import auth from '../actions/auth';
+import auth from '../../actions/auth';
 
-class HomeDrawerNavigationContent extends Component {
+class HomeDrawerNavigatorContent extends Component {
   onPressLogout = () => {
     const {
       logout,
@@ -63,4 +63,4 @@ const mapDispatchToProps = {
   ...auth,
 };
 
-export default connect(null, mapDispatchToProps)(HomeDrawerNavigationContent);
+export default connect(null, mapDispatchToProps)(HomeDrawerNavigatorContent);

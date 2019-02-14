@@ -4,10 +4,10 @@ import {
   createStackNavigator,
 } from 'react-navigation';
 
-import HomeDrawerNavigationContent from './HomeDrawerNavigationContent';
-import HomeScreen from '../screens/Home';
-import SettingsScreen from '../screens/Settings';
-import TabBarIcon from '../components/TabBarIcon';
+import HomeDrawerNavigatorContent from './HomeDrawerNavigatorContent';
+import HomeScreen from '../../screens/Home/Home';
+import SettingsScreen from '../../screens/Settings';
+import TabBarIcon from '../../components/TabBarIcon/TabBarIcon';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -42,5 +42,5 @@ export default createDrawerNavigator({
   SettingsStack,
 }, {
   initialRouteName: 'HomeStack',
-  contentComponent: HomeDrawerNavigationContent,
+  contentComponent: HomeDrawerNavigatorContent,
 });

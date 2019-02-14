@@ -9,7 +9,7 @@ import {
 } from 'react-native-elements';
 import { connect } from 'react-redux';
 
-import auth from '../actions/auth';
+import auth from '../../actions/auth';
 
 import styles from './SignIn.scss';
 

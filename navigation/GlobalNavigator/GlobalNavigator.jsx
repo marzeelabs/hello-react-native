@@ -8,8 +8,8 @@ import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import FlashMessage from 'react-native-flash-message';
 
-import AppNavigator from './AppNavigator';
-import Loading from '../components/Loading';
+import AppNavigator from '../AppNavigator';
+import Loading from '../../components/Loading/Loading';
 
 import styles from './GlobalNavigator.scss';
 

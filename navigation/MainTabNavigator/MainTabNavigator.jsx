@@ -4,9 +4,9 @@ import {
   createStackNavigator,
 } from 'react-navigation';
 
-import HomeDrawerNavigation from './HomeDrawerNavigator';
-import LinksScreen from '../screens/Links';
-import TabBarIcon from '../components/TabBarIcon';
+import HomeDrawerNavigation from '../HomeDrawerNavigator/HomeDrawerNavigator';
+import LinksScreen from '../../screens/Links/Links';
+import TabBarIcon from '../../components/TabBarIcon/TabBarIcon';
 
 import styles from './MainTabNavigator.scss';
 
