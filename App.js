@@ -8,6 +8,8 @@ import {
 } from 'expo';
 import { Provider } from 'react-redux';
 
+import './utils/DefaultFont';
+
 import GlobalNavigator from './navigation/GlobalNavigator';
 import store from './store';
 

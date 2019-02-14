@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import {
-  SafeAreaView,
   ScrollView,
 } from 'react-native';
-import { DrawerItems } from 'react-navigation';
+import {
+  DrawerItems,
+  SafeAreaView,
+} from 'react-navigation';
 import { connect } from 'react-redux';
 
 import TabBarIcon from '../components/TabBarIcon';
