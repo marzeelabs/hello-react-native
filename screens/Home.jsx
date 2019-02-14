@@ -13,15 +13,16 @@ import backend from '../actions/backend';
 import general from '../actions/general';
 import profile from '../actions/profile';
 
+import HamburgerButton from '../components/HamburgerButton';
 import { MonoText } from '../components/StyledText';
-import SignOut from '../components/SignOut';
 
 import styles from './Home.scss';
 
 class HomeScreen extends Component {
-  static navigationOptions = {
+  static navigationOptions = ({ navigation }) => ({
     title: 'Home',
-  };
+    headerLeft: <HamburgerButton navigation={navigation} />,
+  });
 
   componentDidMount() {
     const {
@@ -120,8 +121,6 @@ class HomeScreen extends Component {
               {`Hello ${name}!`}
             </Text>
           </View>
-
-          <SignOut />
         </ScrollView>
 
         <View style={styles['home__tab-bar-info-container']}>

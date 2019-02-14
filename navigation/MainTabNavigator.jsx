@@ -1,28 +1,27 @@
 import React from 'react';
-import { Platform } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import {
+  createBottomTabNavigator,
+  createStackNavigator,
+} from 'react-navigation';
 
-import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/Home';
+import HomeDrawerNavigation from './HomeDrawerNavigator';
 import LinksScreen from '../screens/Links';
-import SettingsScreen from '../screens/Settings';
+import TabBarIcon from '../components/TabBarIcon';
 
 import styles from './MainTabNavigator.scss';
 
-const HomeStack = createStackNavigator({
-  Home: HomeScreen,
-});
+// Having a DrawerNavigator inside a BottomTabNavigator has some issues when
+// switching screens. The chosen stack for the bottom tab sometimes jumps back
+// to the previous. We should only use one type of navigator at a time to
+// prevent such issues; I'm leaving in the code for both for now though as an
+// example of what they can do.
 
-HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+HomeDrawerNavigation.navigationOptions = {
+  title: 'Main',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
+      name="information-circle"
     />
   ),
 };
@@ -32,35 +31,20 @@ const LinksStack = createStackNavigator({
 });
 
 LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+  title: 'Links',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
-    />
-  ),
-};
-
-const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen,
-});
-
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+      name="link"
     />
   ),
 };
 
 export default createBottomTabNavigator({
-  HomeStack,
+  HomeDrawerNavigation,
   LinksStack,
-  SettingsStack,
 }, {
-  initialRouteName: 'HomeStack',
+  initialRouteName: 'HomeDrawerNavigation',
   tabBarOptions: {
     activeBackgroundColor: styles['tab-bar__item--active'].backgroundColor,
     style: styles['tab-bar'],
